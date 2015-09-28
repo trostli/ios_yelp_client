@@ -3,7 +3,7 @@
 //  Yelp
 //
 //  Created by Daniel Trostli on 9/22/15.
-//  Copyright © 2015 Timothy Lee. All rights reserved.
+//  Copyright © 2015 Daniel Trostli. All rights reserved.
 //
 
 import UIKit

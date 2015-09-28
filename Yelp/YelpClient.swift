@@ -2,8 +2,8 @@
 //  YelpClient.swift
 //  Yelp
 //
-//  Created by Timothy Lee on 9/19/14.
-//  Copyright (c) 2014 Timothy Lee. All rights reserved.
+//  Created by Daniel Trostli on 9/19/14.
+//  Copyright (c) 2014 Daniel Trostli. All rights reserved.
 //
 
 import UIKit
@@ -49,10 +49,10 @@ class YelpClient: BDBOAuth1RequestOperationManager {
     }
     
     func searchWithTerm(term: String, completion: ([Business]!, NSError!) -> Void) -> AFHTTPRequestOperation {
-        return searchWithTerm(term, sort: nil, categories: nil, deals: nil, completion: completion)
+        return searchWithTerm(term, sort: nil, categories: nil, deals: nil, radius: nil, completion: completion)
     }
     
-    func searchWithTerm(term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completion: ([Business]!, NSError!) -> Void) -> AFHTTPRequestOperation {
+    func searchWithTerm(term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, radius: Int?, completion: ([Business]!, NSError!) -> Void) -> AFHTTPRequestOperation {
         // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
 
         // Default the location to San Francisco
@@ -64,6 +64,10 @@ class YelpClient: BDBOAuth1RequestOperationManager {
         
         if categories != nil && categories!.count > 0 {
             parameters["category_filter"] = (categories!).joinWithSeparator(",")
+        }
+        
+        if (radius != nil && radius != 0) {
+            parameters["radius_filter"] = radius!
         }
         
         if deals != nil {
